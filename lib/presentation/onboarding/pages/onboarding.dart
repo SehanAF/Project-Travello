@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:myapp/common/widgets/buttton/button_arrow.dart';
 import 'package:myapp/core/configs/theme/app_colors.dart';
 
 class OnboardingPage extends StatefulWidget {
@@ -18,16 +19,16 @@ class _OnboardingPageState extends State<OnboardingPage> {
   final List<Map<String, String>> _pages = [
     {
       'image': 'assets/vectors/slide_image2.svg',
-      'text': 'assets/vectors/slide_text2.svg',
-    },
-    {
-      'image': 'assets/vectors/slide_image2.svg',
-      'text': 'assets/vectors/slide_text2.svg',
+      'text': 'assets/vectors/slide_text1.svg',
     },
     {
       'image': 'assets/vectors/slide_image3.svg',
       'text': 'assets/vectors/slide_text3.svg',
     },
+    // {
+    // 'image': 'assets/vectors/slide_image3.svg',
+    // 'text': 'assets/vectors/slide_text3.svg',
+    //},
   ];
 
   @override
@@ -74,7 +75,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: _buildPageIndicator(),
+          child: Row(
+            children: [_buildPageIndicator(), Spacer(), ButtonArrow()],
+          ),
         ),
       ],
     );
@@ -86,21 +89,24 @@ class _OnboardingPageState extends State<OnboardingPage> {
       children: [
         _indicator(0),
         _indicator(1),
-        _indicator(2),
       ],
     );
   }
 
   Widget _indicator(int index) {
-    return AnimatedContainer(
-      duration: Duration(milliseconds: 300),
-      margin: EdgeInsets.symmetric(horizontal: 8.0),
-      height: 8.0,
-      width: _currentPage == index ? 24.0 : 8.0,
-      decoration: BoxDecoration(
-        color: _currentPage == index ? Colors.pink : Colors.grey,
-        borderRadius: BorderRadius.circular(12),
-      ),
+    return Row(
+      children: [
+        AnimatedContainer(
+          duration: Duration(milliseconds: 300),
+          margin: EdgeInsets.symmetric(horizontal: 8.0),
+          height: 8.0,
+          width: _currentPage == index ? 24.0 : 8.0,
+          decoration: BoxDecoration(
+            color: _currentPage == index ? Colors.pink : Colors.grey,
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+      ],
     );
   }
 }
