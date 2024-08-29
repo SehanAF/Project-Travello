@@ -1,0 +1,2 @@
+configs/: Berisi pengaturan atau konfigurasi aplikasi seperti pengaturan tema, 
+          konfigurasi API, atau konfigurasi lainnya yang bersifat global dan dibutuhkan di berbagai bagian aplikasi.

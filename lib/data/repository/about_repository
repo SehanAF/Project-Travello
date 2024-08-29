@@ -1,0 +1,2 @@
+repository/: Berisi implementasi repositori yang bertanggung jawab untuk mengelola data dari berbagai sumber, 
+             termasuk API, database lokal, atau layanan lainnya. Repositori ini mengabstraksi sumber data yang sebenarnya sehingga bagian lain dari aplikasi tidak perlu mengetahui detail pengambilan data.

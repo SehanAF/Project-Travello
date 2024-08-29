@@ -1,0 +1,2 @@
+models/: Berisi definisi model data yang digunakan dalam aplikasi. Model ini seringkali merepresentasikan data yang didapatkan dari API atau database, 
+         dan dapat digunakan dalam aplikasi untuk menyimpan atau mengolah data.

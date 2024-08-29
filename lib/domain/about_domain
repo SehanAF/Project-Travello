@@ -1,0 +1,2 @@
+Fungsi: Menyimpan logika bisnis murni dari aplikasi. Domain adalah lapisan dalam clean architecture yang bertanggung jawab 
+        untuk mengelola logika aplikasi tanpa bergantung pada framework atau teknologi eksternal.

@@ -1,0 +1,2 @@
+Fungsi: Menyimpan semua yang berkaitan dengan tampilan (UI) dan logika presentasi aplikasi. 
+        Ini adalah lapisan teratas dalam clean architecture yang berinteraksi langsung dengan pengguna.

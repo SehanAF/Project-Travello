@@ -1,0 +1,2 @@
+repository/: Berisi antarmuka (interface) dari repositori yang mendefinisikan kontrak untuk pengambilan dan penyimpanan data. 
+             Implementasi dari repositori ini biasanya terletak di lapisan data/.

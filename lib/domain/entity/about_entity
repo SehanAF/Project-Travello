@@ -1,0 +1,2 @@
+entity/: Berisi entitas domain, yaitu objek-objek yang mewakili konsep utama dalam aplikasi dan logika bisnis yang terkait. 
+         Entitas ini seringkali merupakan bentuk abstrak dari model data dan memiliki logika yang melekat padanya.

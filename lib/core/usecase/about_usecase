@@ -1,0 +1,2 @@
+usecase/: Menyimpan template atau implementasi use case yang bersifat umum. 
+          Use case di sini bisa berupa logika bisnis yang tidak spesifik ke satu fitur, tetapi dapat digunakan di beberapa bagian aplikasi.

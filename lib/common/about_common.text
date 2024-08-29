@@ -1,0 +1,2 @@
+Fungsi: Menyimpan berbagai elemen yang digunakan secara umum di seluruh aplikasi.
+        Folder ini bertujuan untuk menghindari duplikasi kode dengan menyediakan komponen yang dapat digunakan kembali di berbagai bagian aplikasi.
