@@ -1,14 +1,22 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/common/widgets/TextField/text_field.dart';
 import 'package:myapp/common/widgets/buttton/button_login.dart';
 import 'package:myapp/core/configs/assets/app_images.dart';
 import 'package:myapp/core/configs/theme/app_colors.dart';
+import 'package:myapp/data/models/auth/create_user_req.dart';
+import 'package:myapp/domain/repository/usecases/auth/signup.dart';
+import 'package:myapp/presentation/home/pages/home_page.dart';
+import 'package:myapp/service_locator.dart';
 
 class SingnupPage extends StatelessWidget {
-  const SingnupPage({super.key});
+  SingnupPage({super.key});
+
+  final TextEditingController _name = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+  final TextEditingController _mobile = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,19 +43,19 @@ class SingnupPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: Column(
                 children: [
-                  _buildUsernameField(context, TextEditingController()),
+                  _buildUsernameField(context),
                   SizedBox(
                     height: 40,
                   ),
-                  _buildPasswordField(context, TextEditingController()),
+                  _buildPasswordField(context),
                   SizedBox(
                     height: 30,
                   ),
-                  _buildEmailField(context, TextEditingController()),
+                  _buildEmailField(context),
                   SizedBox(
                     height: 30,
                   ),
-                  _buildMobileField(context, TextEditingController()),
+                  _buildMobileField(context),
                   SizedBox(
                     height: 50,
                   ),
@@ -72,42 +80,58 @@ class SingnupPage extends StatelessWidget {
     );
   }
 
-  Widget _buildUsernameField(
-      BuildContext context, TextEditingController username) {
+  Widget _buildUsernameField(BuildContext context) {
     return CustomTextFormField(
-        controller: username,
+        controller: _name,
         customHint: "Username",
-        customValidator: "Username cannot be empty",
         prefixIcon: Icons.person_4_outlined);
   }
 
-  Widget _buildPasswordField(
-      BuildContext context, TextEditingController password) {
+  Widget _buildPasswordField(BuildContext context_) {
     return CustomTextFormField(
-        controller: password,
-        customHint: "Password",
-        customValidator: "Password cannot be empty",
-        prefixIcon: Icons.lock);
+        controller: _password, customHint: "Password", prefixIcon: Icons.lock);
   }
 
-  Widget _buildEmailField(BuildContext context, TextEditingController email) {
+  Widget _buildEmailField(BuildContext context) {
     return CustomTextFormField(
-      controller: email,
+      controller: _email,
       customHint: "Email",
-      customValidator: "Email cannot be empty",
       prefixIcon: Icons.email,
     );
   }
 
-  Widget _buildMobileField(BuildContext context, TextEditingController mobile) {
+  Widget _buildMobileField(BuildContext context) {
     return CustomTextFormField(
-        controller: mobile,
+        controller: _mobile,
         customHint: "Number Handphone",
-        customValidator: "Handphone Number cannot be empty",
         prefixIcon: Icons.mobile_friendly);
   }
 
   Widget _buildSigninButton(BuildContext context) {
-    return CustomButtonLogin(customText: "Create");
+    return CustomButtonLogin(
+      customText: "Create",
+      onPressed: () async {
+        var result = await s1<SignupUseCase>().call(
+            params: CreateUserReq(
+          name: _name.text.toString(),
+          email: _email.text.toString(),
+          password: _password.text.toString(),
+          numberPhone: _mobile.text.toString(),
+        ));
+
+        result.fold(
+          (l) {
+            var snackbar = SnackBar(content: Text(l));
+            ScaffoldMessenger.of(context).showSnackBar(snackbar);
+          },
+          (r) {
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => const HomePage()),
+                (route) => false);
+          },
+        );
+      },
+    );
   }
 }

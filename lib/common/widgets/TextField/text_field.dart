@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController? controller;
   final String customHint;
-  final String customValidator;
   final IconData prefixIcon;
 
   CustomTextFormField({
     this.controller,
     required this.customHint,
-    required this.customValidator,
     required this.prefixIcon,
   });
 
@@ -32,12 +30,6 @@ class CustomTextFormField extends StatelessWidget {
       ),
       child: TextFormField(
         controller: _effectiveController,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return customValidator;
-          }
-          return null;
-        },
         decoration: InputDecoration(
           hintText: customHint,
           filled: true,

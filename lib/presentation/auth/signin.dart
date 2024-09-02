@@ -6,10 +6,17 @@ import 'package:myapp/common/widgets/TextField/text_field.dart';
 import 'package:myapp/common/widgets/buttton/button_login.dart';
 import 'package:myapp/core/configs/assets/app_images.dart';
 import 'package:myapp/core/configs/theme/app_colors.dart';
+import 'package:myapp/data/models/auth/sign_user_req.dart';
+import 'package:myapp/domain/repository/usecases/auth/signin.dart';
 import 'package:myapp/presentation/auth/singnup.dart';
+import 'package:myapp/presentation/home/pages/home_page.dart';
+import 'package:myapp/service_locator.dart';
 
 class SigninPage extends StatelessWidget {
   SigninPage({super.key});
+
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -44,11 +51,11 @@ class SigninPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: Column(
                 children: [
-                  _buildUsernameField(context, TextEditingController()),
+                  _buildUsernameField(context),
                   SizedBox(
                     height: 40,
                   ),
-                  _buildPasswordField(context, TextEditingController()),
+                  _buildPasswordField(context),
                   SizedBox(
                     height: 30,
                   ),
@@ -92,22 +99,16 @@ class SigninPage extends StatelessWidget {
     );
   }
 
-  Widget _buildUsernameField(
-      BuildContext context, TextEditingController username) {
+  Widget _buildUsernameField(BuildContext context) {
     return CustomTextFormField(
-        controller: username,
-        customHint: "Username",
-        customValidator: "Username cannot be empty",
+        controller: _email,
+        customHint: "Username/Email",
         prefixIcon: Icons.person_4_outlined);
   }
 
-  Widget _buildPasswordField(
-      BuildContext context, TextEditingController password) {
+  Widget _buildPasswordField(BuildContext context) {
     return CustomTextFormField(
-        controller: password,
-        customHint: "Password",
-        customValidator: "Password cannot be empty",
-        prefixIcon: Icons.lock);
+        controller: _password, customHint: "Password", prefixIcon: Icons.lock);
   }
 
   Widget _buildForgotPassword() {
@@ -126,7 +127,29 @@ class SigninPage extends StatelessWidget {
   }
 
   Widget _buildSigninButton(BuildContext context) {
-    return CustomButtonLogin(customText: "Sign in");
+    return CustomButtonLogin(
+        customText: "Sign in",
+        onPressed: () async {
+          var result = await s1<SigninUseCase>().call(
+              params: SigninUserReq(
+                  email: _email.text.toString(),
+                  password: _password.text.toString()));
+          result.fold(
+            (l) {
+              var snackbar = SnackBar(
+                content: Text(l),
+                behavior: SnackBarBehavior.floating,
+              );
+              ScaffoldMessenger.of(context).showSnackBar(snackbar);
+            },
+            (r) {
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage()),
+                  (route) => false);
+            },
+          );
+        });
   }
 
   Widget _supportText(BuildContext context) {
