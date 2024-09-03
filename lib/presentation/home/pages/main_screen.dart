@@ -67,6 +67,7 @@ class _MainScreenState extends State<MainScreen> {
             _currentIndex = index;
           });
         },
+
         backgroundColor: Colors.white,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(

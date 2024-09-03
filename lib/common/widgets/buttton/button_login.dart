@@ -1,6 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first, sort_child_properties_last
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_constructors_in_immutables, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 
 class CustomButtonLogin extends StatelessWidget {
