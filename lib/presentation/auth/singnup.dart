@@ -7,7 +7,8 @@ import 'package:myapp/core/configs/assets/app_images.dart';
 import 'package:myapp/core/configs/theme/app_colors.dart';
 import 'package:myapp/data/models/auth/create_user_req.dart';
 import 'package:myapp/domain/repository/usecases/auth/signup.dart';
-import 'package:myapp/presentation/home/pages/home_screen.dart';
+
+import 'package:myapp/presentation/home/pages/main_screen.dart';
 import 'package:myapp/service_locator.dart';
 
 class SingnupPage extends StatelessWidget {
@@ -127,7 +128,7 @@ class SingnupPage extends StatelessWidget {
           (r) {
             Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => const HomePage()),
+                MaterialPageRoute(builder: (context) => MainScreen()),
                 (route) => false);
           },
         );

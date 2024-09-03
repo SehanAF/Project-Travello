@@ -9,7 +9,7 @@ import 'package:myapp/core/configs/theme/app_colors.dart';
 import 'package:myapp/data/models/auth/sign_user_req.dart';
 import 'package:myapp/domain/repository/usecases/auth/signin.dart';
 import 'package:myapp/presentation/auth/singnup.dart';
-import 'package:myapp/presentation/home/pages/home_screen.dart';
+import 'package:myapp/presentation/home/pages/main_screen.dart';
 import 'package:myapp/service_locator.dart';
 
 class SigninPage extends StatelessWidget {
@@ -145,7 +145,7 @@ class SigninPage extends StatelessWidget {
             (r) {
               Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
+                  MaterialPageRoute(builder: (context) => MainScreen()),
                   (route) => false);
             },
           );
