@@ -1,20 +1,41 @@
 import 'package:flutter/material.dart';
 
-class CustomTextFormField extends StatelessWidget {
+class CustomTextFormField extends StatefulWidget {
   final TextEditingController? controller;
   final String customHint;
   final IconData prefixIcon;
+  final bool obscureText;
 
   CustomTextFormField({
     this.controller,
     required this.customHint,
     required this.prefixIcon,
+    this.obscureText = false,
   });
+
+  @override
+  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
+}
+
+class _CustomTextFormFieldState extends State<CustomTextFormField> {
+  bool _obscureText = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _obscureText = widget.obscureText;
+  }
+
+  void _toggleObscureText() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final TextEditingController _effectiveController =
-        controller ?? TextEditingController();
+        widget.controller ?? TextEditingController();
 
     return Container(
       decoration: BoxDecoration(
@@ -30,8 +51,9 @@ class CustomTextFormField extends StatelessWidget {
       ),
       child: TextFormField(
         controller: _effectiveController,
+        obscureText: _obscureText,
         decoration: InputDecoration(
-          hintText: customHint,
+          hintText: widget.customHint,
           filled: true,
           fillColor: Colors.white,
           border: OutlineInputBorder(
@@ -39,10 +61,19 @@ class CustomTextFormField extends StatelessWidget {
             borderSide: BorderSide.none,
           ),
           prefixIcon: Icon(
-            prefixIcon,
+            widget.prefixIcon,
             color: Colors.grey,
           ),
           contentPadding: EdgeInsets.symmetric(vertical: 15),
+          suffixIcon: widget.obscureText
+              ? IconButton(
+                  icon: Icon(
+                    _obscureText ? Icons.visibility_off : Icons.visibility,
+                    color: Colors.grey,
+                  ),
+                  onPressed: _toggleObscureText,
+                )
+              : null,
         ),
         style: TextStyle(
           color: Colors.black,

@@ -102,13 +102,18 @@ class SigninPage extends StatelessWidget {
   Widget _buildUsernameField(BuildContext context) {
     return CustomTextFormField(
         controller: _email,
-        customHint: "Username/Email",
-        prefixIcon: Icons.person_4_outlined);
+        customHint: "Email",
+        prefixIcon: Icons.person_4_outlined,
+        obscureText: false);
   }
 
   Widget _buildPasswordField(BuildContext context) {
     return CustomTextFormField(
-        controller: _password, customHint: "Password", prefixIcon: Icons.lock);
+      controller: _password,
+      customHint: "Password",
+      prefixIcon: Icons.lock,
+      obscureText: true,
+    );
   }
 
   Widget _buildForgotPassword() {

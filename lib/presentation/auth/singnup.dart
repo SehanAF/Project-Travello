@@ -85,12 +85,16 @@ class SingnupPage extends StatelessWidget {
     return CustomTextFormField(
         controller: _name,
         customHint: "Username",
-        prefixIcon: Icons.person_4_outlined);
+        prefixIcon: Icons.person_4_outlined,
+        obscureText: false);
   }
 
   Widget _buildPasswordField(BuildContext context_) {
     return CustomTextFormField(
-        controller: _password, customHint: "Password", prefixIcon: Icons.lock);
+        controller: _password,
+        customHint: "Password",
+        prefixIcon: Icons.lock,
+        obscureText: true);
   }
 
   Widget _buildEmailField(BuildContext context) {
@@ -98,6 +102,7 @@ class SingnupPage extends StatelessWidget {
       controller: _email,
       customHint: "Email",
       prefixIcon: Icons.email,
+      obscureText: false,
     );
   }
 
@@ -105,7 +110,8 @@ class SingnupPage extends StatelessWidget {
     return CustomTextFormField(
         controller: _mobile,
         customHint: "Number Handphone",
-        prefixIcon: Icons.mobile_friendly);
+        prefixIcon: Icons.mobile_friendly,
+        obscureText: false);
   }
 
   Widget _buildSigninButton(BuildContext context) {

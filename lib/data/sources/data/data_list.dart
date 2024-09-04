@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+// Berikut adalah data transaksi yang digunakan dalam aplikasi
+// Data transaksi berupa list of map, dimana setiap map memiliki key-value
+// berupa:
+//   - 'icon': FaIcon yang digunakan sebagai ikon transaksi
+//   - 'color': Warna yang digunakan sebagai background untuk ikon transaksi
+//   - 'name': Nama transaksi yang ditampilkan
+//   - 'totalAmount': Total biaya transaksi yang ditampilkan
+//   - 'date': Tanggal transaksi yang ditampilkan
 List<Map<String, dynamic>> transactionData = [
   {
     'icon': const FaIcon(FontAwesomeIcons.mugSaucer),
