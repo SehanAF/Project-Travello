@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/presentation/home/pages/add_expense/pages/add_expense.dart';
 import 'package:myapp/presentation/home/pages/home_screen.dart';
 import 'package:myapp/presentation/home/pages/stats.dart';
 
@@ -34,7 +35,10 @@ class _MainScreenState extends State<MainScreen> {
   Widget _buildFloatingActionButton() {
     return FloatingActionButton(
       shape: CircleBorder(),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => AddExpense()));
+      },
       child: Container(
         width: 60,
         height: 60,
@@ -52,6 +56,7 @@ class _MainScreenState extends State<MainScreen> {
         child: const Icon(
           Icons.add,
           size: 28,
+          color: Colors.white,
         ),
       ),
     );
@@ -73,6 +78,7 @@ class _MainScreenState extends State<MainScreen> {
           BottomNavigationBarItem(
             icon: Icon(
               CupertinoIcons.home,
+              size: 30,
               color: _currentIndex == 0
                   ? Colors.blue
                   : Colors.grey, // Warna berubah sesuai index
@@ -82,6 +88,7 @@ class _MainScreenState extends State<MainScreen> {
           BottomNavigationBarItem(
             icon: Icon(
               CupertinoIcons.graph_square_fill,
+              size: 30,
               color: _currentIndex == 1
                   ? Colors.blue
                   : Colors.grey, // Warna berubah sesuai index

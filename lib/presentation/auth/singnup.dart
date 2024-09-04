@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/common/widgets/TextField/text_field.dart';
 import 'package:myapp/common/widgets/buttton/button_login.dart';
@@ -67,7 +68,15 @@ class SingnupPage extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40),
-                  child: _buildSigninButton(context),
+                  child: Column(
+                    children: [
+                      _buildSigninButton(context),
+                      SizedBox(
+                        height: 100,
+                      ),
+                      _supportText(context),
+                    ],
+                  ),
                 ),
                 Align(
                   alignment: Alignment.bottomLeft,
@@ -139,6 +148,33 @@ class SingnupPage extends StatelessWidget {
           },
         );
       },
+    );
+  }
+
+  Widget _supportText(BuildContext context) {
+    return Center(
+      child: RichText(
+        text: TextSpan(
+          children: <TextSpan>[
+            TextSpan(
+              text: "You have an account? ",
+              style: TextStyle(color: Colors.black),
+            ),
+            TextSpan(
+              text: 'Click Here',
+              style: TextStyle(
+                color: Colors.deepOrange,
+                fontWeight: FontWeight.bold,
+                decoration: TextDecoration.underline,
+              ),
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  Navigator.of(context).pop();
+                },
+            )
+          ],
+        ),
+      ),
     );
   }
 }

@@ -103,6 +103,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             borderRadius: BorderRadius.circular(30),
             borderSide: BorderSide.none,
           ),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30),
+              borderSide: BorderSide.none),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30),
+              borderSide: BorderSide.none),
 
           /// Membuat prefix icon untuk text field
           prefixIcon: Icon(
@@ -124,11 +130,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   onPressed: _toggleObscureText,
                 )
               : null,
-        ),
-
-        /// Membuat style untuk text field
-        style: TextStyle(
-          color: Colors.black,
         ),
       ),
     );
