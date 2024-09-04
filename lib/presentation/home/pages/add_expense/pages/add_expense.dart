@@ -28,6 +28,8 @@ class _AddExpenseState extends State<AddExpense> {
     "travel",
   ];
 
+  String iconSelected = "";
+
   @override
   void initState() {
     _dateController.text = DateFormat('dd/MM/yy').format(DateTime.now());
@@ -163,153 +165,187 @@ class _AddExpenseState extends State<AddExpense> {
                         return AlertDialog(
                             title: Text("Create a Category"),
                             backgroundColor:
-                                const Color.fromARGB(255, 171, 228, 250),
-                            content: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                TextFormField(
-                                  // controller: _dateController,
-                                  onTap: () {
-                                    setState(() {
-                                      isExpended = !isExpended;
-                                    });
-                                  },
-                                  textAlignVertical: TextAlignVertical.bottom,
-                                  readOnly: true,
-                                  decoration: InputDecoration(
-                                    isDense: true,
-                                    filled: true,
-                                    suffixIcon: Icon(
-                                      CupertinoIcons.chevron_down,
+                                const Color.fromRGBO(171, 228, 250, 1),
+                            content: SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  TextFormField(
+                                    // controller: _dateController,
+                                    // onTap: () {
+                                    //   setState(() {
+                                    //     isExpended = !isExpended;
+                                    //   });
+                                    // },
+                                    textAlignVertical: TextAlignVertical.bottom,
+                                    readOnly: true,
+                                    decoration: InputDecoration(
+                                      isDense: true,
+                                      filled: true,
+                                      suffixIcon: Icon(
+                                        CupertinoIcons.chevron_down,
+                                      ),
+                                      fillColor: Colors.white,
+                                      hintText: "Name",
+                                      enabledBorder: OutlineInputBorder(
+                                          borderRadius: isExpended
+                                              ? BorderRadius.vertical(
+                                                  top: Radius.circular(12))
+                                              : BorderRadius.circular(12),
+                                          borderSide: BorderSide.none),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderRadius: isExpended
+                                              ? BorderRadius.vertical(
+                                                  top: Radius.circular(12))
+                                              : BorderRadius.circular(12),
+                                          borderSide: BorderSide.none),
                                     ),
-                                    fillColor: Colors.white,
-                                    hintText: "Name",
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius: isExpended
-                                            ? BorderRadius.vertical(
-                                                top: Radius.circular(12))
-                                            : BorderRadius.circular(12),
-                                        borderSide: BorderSide.none),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius: isExpended
-                                            ? BorderRadius.vertical(
-                                                top: Radius.circular(12))
-                                            : BorderRadius.circular(12),
-                                        borderSide: BorderSide.none),
+                                    style: TextStyle(color: Colors.grey),
                                   ),
-                                  style: TextStyle(color: Colors.grey),
-                                ),
-                                isExpended
-                                    ? Container(
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        height: 200,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.vertical(
-                                              bottom: Radius.circular(12)),
-                                        ),
-                                        child: GridView.builder(
-                                          gridDelegate:
-                                              SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 3,
+                                  // isExpended
+                                  // ? Container(
+                                  //     width:
+                                  //         MediaQuery.of(context).size.width,
+                                  //     height: 200,
+                                  //     decoration: BoxDecoration(
+                                  //       color: Colors.white,
+                                  //       borderRadius: BorderRadius.vertical(
+                                  //           bottom: Radius.circular(12)),
+                                  //     ),
+                                  //   )
+                                  // : Container(),
+                                  SizedBox(
+                                    height: 16,
+                                  ),
+                                  TextFormField(
+                                    // controller: _dateController,
+                                    onTap: () {
+                                      setState(() {
+                                        isExpended = !isExpended;
+                                      });
+                                    },
+                                    textAlignVertical: TextAlignVertical.bottom,
+                                    readOnly: true,
+                                    decoration: InputDecoration(
+                                      isDense: true,
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      suffixIcon: Icon(
+                                        CupertinoIcons.chevron_down,
+                                      ),
+                                      hintText: "Icon",
+                                      enabledBorder: OutlineInputBorder(
+                                          borderRadius: isExpended
+                                              ? BorderRadius.vertical(
+                                                  top: Radius.circular(12))
+                                              : BorderRadius.circular(12),
+                                          borderSide: BorderSide.none),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderRadius: isExpended
+                                              ? BorderRadius.vertical(
+                                                  top: Radius.circular(12))
+                                              : BorderRadius.circular(12),
+                                          borderSide: BorderSide.none),
+                                    ),
+                                    style: TextStyle(color: Colors.grey),
+                                  ),
+                                  isExpended
+                                      ? Container(
+                                          width: double.infinity,
+                                          height: 200,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.vertical(
+                                                      bottom:
+                                                          Radius.circular(12))),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: GridView.builder(
+                                              gridDelegate:
+                                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 3,
+                                                crossAxisSpacing: 5,
+                                                mainAxisSpacing: 5,
+                                              ),
+                                              itemCount:
+                                                  myCategoriesIcons.length,
+                                              itemBuilder: (context, int i) {
+                                                return GestureDetector(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      iconSelected =
+                                                          myCategoriesIcons[i];
+                                                    });
+                                                  },
+                                                  child: Container(
+                                                      decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                      width: 3,
+                                                      color: iconSelected ==
+                                                              myCategoriesIcons[
+                                                                  i]
+                                                          ? Colors.blue
+                                                          : Colors.grey,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12),
+                                                    image: DecorationImage(
+                                                      image: AssetImage(
+                                                          'assets/images/categories/${myCategoriesIcons[i]}.png'),
+                                                    ),
+                                                  )),
+                                                );
+                                              },
+                                            ),
                                           ),
-                                          itemCount: myCategoriesIcons.length,
-                                          itemBuilder: (context, int i) {
-                                            return Container(
-                                                decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                  image: AssetImage(
-                                                      'assets/images/categories/${myCategoriesIcons[i]}.png'),
-                                                  fit: BoxFit.cover),
-                                            ));
-                                          },
-                                        ),
-                                      )
-                                    : Container(),
-                                SizedBox(
-                                  height: 16,
-                                ),
-                                TextFormField(
-                                  // controller: _dateController,
-                                  onTap: () {
-                                    setState(() {
-                                      isExpended = !isExpended;
-                                    });
-                                  },
-                                  textAlignVertical: TextAlignVertical.bottom,
-                                  readOnly: true,
-                                  decoration: InputDecoration(
-                                    isDense: true,
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    suffixIcon: Icon(
-                                      CupertinoIcons.chevron_down,
-                                    ),
-                                    hintText: "Icon",
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.vertical(
-                                            top: Radius.circular(12)),
-                                        borderSide: BorderSide.none),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.vertical(
-                                            top: Radius.circular(12)),
-                                        borderSide: BorderSide.none),
+                                        )
+                                      : Container(),
+                                  SizedBox(
+                                    height: 16,
                                   ),
-                                  style: TextStyle(color: Colors.grey),
-                                ),
-                                isExpended
-                                    ? Container(
-                                        width: double.infinity,
-                                        height: 200,
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.vertical(
-                                                bottom: Radius.circular(12))),
-                                      )
-                                    : Container(),
-                                SizedBox(
-                                  height: 16,
-                                ),
-                                TextFormField(
-                                  // controller: _dateController,
-                                  onTap: () {
-                                    setState(() {
-                                      isExpended = !isExpended;
-                                    });
-                                  },
-                                  textAlignVertical: TextAlignVertical.bottom,
-                                  readOnly: true,
-                                  decoration: InputDecoration(
-                                    isDense: true,
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    suffixIcon: Icon(
-                                      CupertinoIcons.chevron_down,
+                                  TextFormField(
+                                    // controller: _dateController,
+                                    // onTap: () {
+                                    //   setState(() {
+                                    //     isExpended = !isExpended;
+                                    //   });
+                                    // },
+                                    textAlignVertical: TextAlignVertical.bottom,
+                                    readOnly: true,
+                                    decoration: InputDecoration(
+                                      isDense: true,
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      suffixIcon: Icon(
+                                        CupertinoIcons.chevron_down,
+                                      ),
+                                      hintText: "Color",
+                                      enabledBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15.0),
+                                          borderSide: BorderSide.none),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                          borderSide: BorderSide.none),
                                     ),
-                                    hintText: "Color",
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(15.0),
-                                        borderSide: BorderSide.none),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                        borderSide: BorderSide.none),
+                                    style: TextStyle(color: Colors.grey),
                                   ),
-                                  style: TextStyle(color: Colors.grey),
-                                ),
-                                isExpended
-                                    ? Container(
-                                        width: double.infinity,
-                                        height: 200,
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.vertical(
-                                                bottom: Radius.circular(12))),
-                                      )
-                                    : Container(),
-                              ],
+                                  // isExpended
+                                  //     ? Container(
+                                  //         width: double.infinity,
+                                  //         height: 200,
+                                  //         decoration: BoxDecoration(
+                                  //             color: Colors.white,
+                                  //             borderRadius: BorderRadius.vertical(
+                                  //                 bottom: Radius.circular(12))),
+                                  //       )
+                                  //     : Container(),
+                                ],
+                              ),
                             ));
                       });
                     });
